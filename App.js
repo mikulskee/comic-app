@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
+import Header from "./components/Header";
+import Card from "./components/Card";
 
 export default function App() {
   const [latestNum, setLatestNum] = useState();
@@ -46,21 +48,28 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {data.map(item => (
-        <Text key={item.num} style={styles.title}>
-          {item.title}
-        </Text>
-      ))}
+      <Header />
+
+      <ScrollView style={styles.content}>
+        {data.map(item => (
+          <Card key={item.title} item={item} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    backgroundColor: "#000"
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: "#121212",
+    paddingHorizontal: 20
   },
   title: {
     color: "#fff"
+  },
+  content: {
+    marginTop: 20
   }
 });
