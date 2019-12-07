@@ -1,32 +1,64 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function App() {
-  const URL = "https://xkcd.com/info.0.json";
-  const fetchData = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
-    console.log(data);
-    return data;
+  const [latestNum, setLatestNum] = useState();
+  const [data, setData] = useState([]);
+
+  const addItemsToData = item => {
+    setData([...data].concat(item));
   };
+
+  const URL = "https://xkcd.com/info.0.json";
+
+  const fetchLatestNumber = async () => {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    setLatestNum(responseJSON.num);
+  };
+
+  const fetchData = () => {
+    if (latestNum) {
+      let items = [];
+      const fetchedObject = async id => {
+        const response = await fetch(`https://xkcd.com/${id}/info.0.json`);
+        const data = await response.json();
+        return data;
+      };
+
+      for (i = 1; i < 9; i++) {
+        const id = latestNum + 1 - i;
+        fetchedObject(id).then(data => {
+          items.push(data);
+          addItemsToData(items);
+        });
+      }
+    } else return;
+  };
+
+  useEffect(() => {
+    fetchLatestNumber();
+  }, []);
+
   useEffect(() => {
     fetchData();
-  });
+  }, [latestNum]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Comics App</Text>
-      <Text style={styles.title}>powered by XKCD</Text>
+      {data.map(item => (
+        <Text key={item.num} style={styles.title}>
+          {item.title}
+        </Text>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center"
+    marginTop: 20,
+    backgroundColor: "#000"
   },
   title: {
     color: "#fff"
