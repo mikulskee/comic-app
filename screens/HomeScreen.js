@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  RefreshControl
+} from "react-native";
 import Header from "../components/Header";
 import Card from "../components/Card";
 
@@ -46,10 +52,28 @@ export default function HomeScreen({ navigation }) {
     fetchData();
   }, [latestNum]);
 
+  const wait = timeout => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  };
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+
+    wait(1000).then(() => setRefreshing(false));
+  }, [refreshing]);
+
   return (
     <View style={styles.container}>
       <Header />
-      <ScrollView style={styles.content}>
+      <ScrollView
+        style={styles.content}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {data.map(item => (
           <TouchableOpacity
             key={item.title}
