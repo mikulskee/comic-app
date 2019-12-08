@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   subtitle: {
     color: "#fff",
     textAlign: "center",
-
     fontSize: 12
   },
   bold: {
