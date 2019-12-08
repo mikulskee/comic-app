@@ -9,7 +9,7 @@ export default function Card({ item }) {
       </View>
       <View>
         <Image
-          style={{ width: 200, height: 200 }}
+          style={{ width: 100, height: 100 }}
           resizeMode="contain"
           source={{ uri: item.img }}
         />
@@ -26,14 +26,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
     marginTop: 10,
+    marginBottom: 10,
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#121212",
+    borderRadius: 10
   },
   title: {
     color: "white",
     width: 100,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "montserrat-bold"
   }
 });

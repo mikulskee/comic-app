@@ -1,32 +1,23 @@
-import React from "react";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import HomeScreen from "./screens/HomeScreen";
-import DetailsScreen from "./screens/DetailsScreen";
+import React, { useState } from "react";
+import Navigator from "./routes/Navigator";
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
 
-const RootStack = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: {
-        headerShown: false
-      }
-    },
-
-    Details: {
-      screen: DetailsScreen,
-      navigationOptions: {
-        headerShown: false
-      }
-    }
-  },
-  {
-    initialRouteName: "Home"
-  }
-);
-
-const AppContainer = createAppContainer(RootStack);
+const getFonts = () =>
+  Font.loadAsync({
+    "rancho-regular": require("./assets/fonts/Rancho-Regular.ttf"),
+    "montserrat-light": require("./assets/fonts/Montserrat-Light.ttf"),
+    "montserrat-bold": require("./assets/fonts/Montserrat-Bold.ttf")
+  });
 
 export default function App() {
-  return <AppContainer />;
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  if (fontsLoaded) {
+    return <Navigator />;
+  } else {
+    return (
+      <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />
+    );
+  }
 }
