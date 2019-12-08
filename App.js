@@ -6,8 +6,19 @@ import DetailsScreen from "./screens/DetailsScreen";
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Details: DetailsScreen
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        headerShown: false
+      }
+    },
+
+    Details: {
+      screen: DetailsScreen,
+      navigationOptions: {
+        headerShown: false
+      }
+    }
   },
   {
     initialRouteName: "Home"

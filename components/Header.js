@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Header() {
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>Comic App</Text>
+      <Text style={styles.title}>Comicccc App</Text>
       <Text style={styles.subtitle}>
         powered by <Text style={styles.bold}>xkcd</Text>
       </Text>
@@ -14,7 +14,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: 10
+    paddingVertical: 20
   },
   title: {
     color: "#fff",
