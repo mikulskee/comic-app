@@ -41,8 +41,7 @@ export default function HomeScreen({ navigation }) {
           addItemsToData(items);
         });
       }
-    } else {
-    }
+    } else return;
   };
 
   useEffect(() => {

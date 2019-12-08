@@ -5,8 +5,16 @@ export default function Card({ item }) {
   return (
     <View style={styles.card}>
       <View>
-        <Text style={styles.title}>{item.title}</Text>
+        <View>
+          <Text style={styles.title}>{item.title}</Text>
+        </View>
+        <View>
+          <Text style={styles.date}>
+            {item.day}.{item.month}.{item.year}
+          </Text>
+        </View>
       </View>
+
       <View>
         <Image
           style={{ width: 100, height: 100 }}
@@ -23,7 +31,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 20,
     borderStyle: "solid",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#cfcc21",
     marginTop: 10,
     marginBottom: 10,
@@ -39,5 +47,13 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: "center",
     fontFamily: "montserrat-bold"
+  },
+  date: {
+    color: "#cfcc21",
+    fontSize: 10,
+    marginTop: 10,
+    width: 100,
+    textAlign: "center",
+    fontFamily: "montserrat-light"
   }
 });
