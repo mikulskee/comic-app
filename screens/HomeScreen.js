@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
   const fetchLatestNumber = async () => {
     const response = await fetch(URL);
     const responseJSON = await response.json();
-    setLatestNum(responseJSON.num);
+    return responseJSON.num;
   };
 
   const fetchData = () => {
@@ -41,11 +41,14 @@ export default function HomeScreen({ navigation }) {
           addItemsToData(items);
         });
       }
-    } else return;
+    } else {
+    }
   };
 
   useEffect(() => {
-    fetchLatestNumber();
+    fetchLatestNumber().then(item => {
+      setLatestNum(item);
+    });
   }, []);
 
   useEffect(() => {
@@ -61,9 +64,13 @@ export default function HomeScreen({ navigation }) {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    setData([]);
 
-    wait(1000).then(() => setRefreshing(false));
-  }, [refreshing]);
+    wait(1000).then(() => {
+      fetchData();
+      setRefreshing(false);
+    });
+  }, [refreshing, latestNum]);
 
   return (
     <View style={styles.container}>
@@ -89,8 +96,9 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
-    backgroundColor: "#ddd"
+    backgroundColor: "#abafc2"
   },
 
   content: {

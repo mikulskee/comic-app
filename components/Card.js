@@ -24,18 +24,18 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: "#cfcc21",
     marginTop: 10,
     marginBottom: 10,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#121212",
+    backgroundColor: "#040f1f",
     borderRadius: 10
   },
   title: {
-    color: "white",
+    color: "#cfcc21",
     width: 100,
     textAlign: "center",
     fontFamily: "montserrat-bold"
